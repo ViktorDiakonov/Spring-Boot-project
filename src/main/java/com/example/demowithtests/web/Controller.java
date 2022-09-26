@@ -28,7 +28,6 @@ public class Controller {
     private final EmployeeConverter converter;
 
 
-
     //Операция сохранения юзера в базу данных
     @PostMapping("/users")
     @ResponseStatus(HttpStatus.CREATED)
