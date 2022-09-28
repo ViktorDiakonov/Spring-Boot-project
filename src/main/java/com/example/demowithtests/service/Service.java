@@ -32,17 +32,18 @@ public interface Service {
 
     List<Employee>getEmployeeByPhoneU(String phone);
 
-    Page<Employee> getAllWithPagination(Pageable pageable);
+    Page<Employee> findByName(String name, int page, int size, List<String> sortList, String sortOrder);
 
-    //Page<Employee> findByCountryContaining(String country, Pageable pageable);
     /**
-     * @param country  Filter for the country if required
-     * @param page            number of the page returned
-     * @param size            number of entries in each page
-     * @param sortList        list of columns to sort on
-     * @param sortOrder       sort order. Can be ASC or DESC
-     * @return Page object with customers after filtering and sorting
+     * Find all employees with the given address, and return them in a pageable format.
+     *
+     * @param address The address to search for.
+     * @param page The page number to retrieve.
+     * @param size The number of records to return per page.
+     * @param sortList A list of fields to sort by.
+     * @param sortOrder "asc" or "desc"
+     * @return A Page<Employee> object.
      */
-    Page<Employee> findByCountryContaining(String country, int page, int size, List<String> sortList, String sortOrder);
+    Page<Employee> findByAddress(String address, int page, int size, List<String> sortList, String sortOrder);
 
 }

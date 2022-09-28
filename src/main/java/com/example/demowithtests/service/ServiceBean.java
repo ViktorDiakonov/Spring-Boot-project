@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -116,24 +117,18 @@ public class ServiceBean implements Service {
     }
 
     @Override
-    public Page<Employee> getAllWithPagination(Pageable pageable) {
-        log.debug("getAllWithPagination() - start: pageable = {}", pageable);
-        Page<Employee> list = repository.findAll(pageable);
-        log.debug("getAllWithPagination() - end: list = {}", list);
-        return list;
+    public Page<Employee> findByName(String name, int page, int size, List<String> sortList, String sortOrder) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(createSortOrder(sortList, sortOrder)));
+        return repository.findByName(name, pageable);
     }
 
-      /*@Override
-    public Page<Employee> findByCountryContaining(String country, Pageable pageable) {
-        return employeeRepository.findByCountryContaining(country, pageable);
-    }*/
 
     @Override
-    public Page<Employee> findByCountryContaining(String country, int page, int size, List<String> sortList, String sortOrder) {
+    public Page<Employee> findByAddress(String address, int page, int size, List<String> sortList, String sortOrder) {
         // create Pageable object using the page, size and sort details
         Pageable pageable = PageRequest.of(page, size, Sort.by(createSortOrder(sortList, sortOrder)));
         // fetch the page object by additionally passing pageable with the filters
-        return repository.findByCountryContaining(country, pageable);
+        return repository.findByAddress(address, pageable);
     }
 
     private List<Sort.Order> createSortOrder(List<String> sortList, String sortDirection) {

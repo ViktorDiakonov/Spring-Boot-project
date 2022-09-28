@@ -3,7 +3,6 @@ package com.example.demowithtests.web;
 import com.example.demowithtests.domain.Employee;
 import com.example.demowithtests.dto.*;
 import com.example.demowithtests.service.Service;
-import com.example.demowithtests.service.ServiceBean;
 import com.example.demowithtests.util.config.mapStrukt.EmployeeMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -11,6 +10,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -212,6 +215,28 @@ public class Controller {
     @ResponseStatus(HttpStatus.OK)
     public List<Employee> getNameByPhone(@RequestParam (value = "phone") String phone) {
         return service.getNameByPhone(phone);
+    }
+
+    @GetMapping("/users/name")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<Employee> findByName(@RequestParam(required = false) String name,
+                                     @RequestParam(defaultValue = "0") int page,
+                                     @RequestParam(defaultValue = "3") int size,
+                                     @RequestParam(defaultValue = "") List<String> sortList,
+                                     @RequestParam(defaultValue = "DESC") Sort.Direction sortOrder) {
+        return service.findByName(name, page, size, sortList, sortOrder.toString());
+    }
+
+    @GetMapping("/users/address")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<Employee> findByCountry(@RequestParam(required = false) String address,
+                                        @RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "3") int size,
+                                        @RequestParam(defaultValue = "") List<String> sortList,
+                                        @RequestParam(defaultValue = "DESC") Sort.Direction sortOrder) {
+        //Pageable paging = PageRequest.of(page, size);
+        //Pageable paging = PageRequest.of(page, size, Sort.by("name").ascending());
+        return service.findByAddress(address, page, size, sortList, sortOrder.toString());
     }
 
 }

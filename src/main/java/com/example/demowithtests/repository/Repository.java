@@ -4,7 +4,6 @@ import com.example.demowithtests.domain.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 
 import javax.validation.constraints.NotNull;
@@ -14,7 +13,7 @@ import java.util.List;
 //@Component
 public interface Repository extends JpaRepository<Employee, Integer> {
 
-    Employee findByName(String name);
+   // Employee findByName(String name);
 
     // выводит всех пользователей с указанным именем
     @Query("SELECT e FROM Employee e WHERE e.name = ?1")
@@ -31,15 +30,15 @@ public interface Repository extends JpaRepository<Employee, Integer> {
 
     //получение пользователя по его номеру телефона
     @Query("SELECT e FROM Employee e WHERE e.phone = ?1")
-    List<Employee> getEmployeeByPhone (String phone);
+    List<Employee> getEmployeeByPhone(String phone);
 
     @Query(value = "SELECT * FROM Users WHERE phone LIKE ?%", nativeQuery = true)
     List<Employee> getEmployeeByPhoneU(String phone);
 
-    @NotNull
-    Page<Employee> findAll(Pageable pageable);
 
     Page<Employee> findByName(String name, Pageable pageable);
 
-    Page<Employee> findByCountryContaining(String country, Pageable pageable);
+  //  Page<Employee> findByName(String name, Pageable pageable);
+
+    Page<Employee> findByAddress(String address, Pageable pageable);
 }
