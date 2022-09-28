@@ -131,6 +131,13 @@ public class ServiceBean implements Service {
         return repository.findByAddress(address, pageable);
     }
 
+    @Override
+    public Page<Employee> findAll(int page, int size, List<String> sortList, String sortOrder) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(createSortOrder(sortList, sortOrder)));
+        return repository.findAll(pageable);
+    }
+
+
     private List<Sort.Order> createSortOrder(List<String> sortList, String sortDirection) {
         List<Sort.Order> sorts = new ArrayList<>();
         Sort.Direction direction;

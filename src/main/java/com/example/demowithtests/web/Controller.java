@@ -219,9 +219,17 @@ public class Controller {
 
     @GetMapping("/users/name")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "This is endpoint Find all employees with the given name, " +
+            "and return them in a pageable format.", description =
+            "Create request to find all employee by name", tags = {"Employee"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "OK. Information was get successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND. Specified employee request not found."),
+            @ApiResponse(responseCode = "409", description = "Employee already exists")})
     public Page<Employee> findByName(@RequestParam(required = false) String name,
                                      @RequestParam(defaultValue = "0") int page,
-                                     @RequestParam(defaultValue = "3") int size,
+                                     @RequestParam(defaultValue = "5") int size,
                                      @RequestParam(defaultValue = "") List<String> sortList,
                                      @RequestParam(defaultValue = "DESC") Sort.Direction sortOrder) {
         return service.findByName(name, page, size, sortList, sortOrder.toString());
@@ -229,14 +237,37 @@ public class Controller {
 
     @GetMapping("/users/address")
     @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "This is endpoint Find all employees with the given address, " +
+            "and return them in a pageable format.", description =
+            "Create request to find all employee by address", tags = {"Employee"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "OK. Information was get successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND. Specified employee request not found."),
+            @ApiResponse(responseCode = "409", description = "Employee already exists")})
     public Page<Employee> findByCountry(@RequestParam(required = false) String address,
                                         @RequestParam(defaultValue = "0") int page,
                                         @RequestParam(defaultValue = "3") int size,
                                         @RequestParam(defaultValue = "") List<String> sortList,
                                         @RequestParam(defaultValue = "DESC") Sort.Direction sortOrder) {
-        //Pageable paging = PageRequest.of(page, size);
-        //Pageable paging = PageRequest.of(page, size, Sort.by("name").ascending());
         return service.findByAddress(address, page, size, sortList, sortOrder.toString());
+    }
+
+    @GetMapping("/users/all")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "This is endpoint Find all employees, sort them by the given list of fields, and return " +
+            "the page of results.", description =
+            "Create request to read all employee", tags = {"Employee"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "OK. Information was get successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND. Specified employee request not found."),
+            @ApiResponse(responseCode = "409", description = "Employee already exists")})
+    public Page<Employee> findByCountry(@RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "10") int size,
+                                        @RequestParam(defaultValue = "") List<String> sortList,
+                                        @RequestParam(defaultValue = "ASC") Sort.Direction sortOrder) {
+        return service.findAll(page, size, sortList, sortOrder.toString());
     }
 
 }

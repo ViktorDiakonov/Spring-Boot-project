@@ -32,6 +32,18 @@ public interface Service {
 
     List<Employee>getEmployeeByPhoneU(String phone);
 
+
+    /**
+     * Find all employees with the given name, and return them in a page of size - size, sorted by the given sortList in the
+     * given sortOrder.
+     *
+     * @param name The name of the employee to search for.
+     * @param page The page number to retrieve.
+     * @param size The number of records per page.
+     * @param sortList A list of fields to sort by.
+     * @param sortOrder "asc" or "desc"
+     * @return Page<Employee>
+     */
     Page<Employee> findByName(String name, int page, int size, List<String> sortList, String sortOrder);
 
     /**
@@ -45,5 +57,17 @@ public interface Service {
      * @return A Page<Employee> object.
      */
     Page<Employee> findByAddress(String address, int page, int size, List<String> sortList, String sortOrder);
+
+
+    /**
+     * Find all employees, sort them by the given list of fields, and return the page of results.
+     *
+     * @param page The page number to be retrieved.
+     * @param size The number of records to return per page.
+     * @param sortList A list of fields to sort by.
+     * @param sortOrder The sort order, either "asc" or "desc".
+     * @return A Page<Employee> object.
+     */
+    Page<Employee> findAll(int page, int size, List<String> sortList, String sortOrder);
 
 }

@@ -35,10 +35,12 @@ public interface Repository extends JpaRepository<Employee, Integer> {
     @Query(value = "SELECT * FROM Users WHERE phone LIKE ?%", nativeQuery = true)
     List<Employee> getEmployeeByPhoneU(String phone);
 
-
+    // поиск пользователей по имени с использованием пагинации, фильтрации сортировки
     Page<Employee> findByName(String name, Pageable pageable);
 
-  //  Page<Employee> findByName(String name, Pageable pageable);
-
+    // поиск пользователей по адресу с использованием пагинации, фильтрации сортировки
     Page<Employee> findByAddress(String address, Pageable pageable);
+
+    // поиск всех пользователей с использованием пагинации, фильтрации сортировки
+    Page<Employee> findAll(Pageable pageable);
 }
