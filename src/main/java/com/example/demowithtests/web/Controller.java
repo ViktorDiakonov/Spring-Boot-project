@@ -11,8 +11,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -270,10 +268,10 @@ public class Controller {
         return service.findAll(page, size, sortList, sortOrder.toString());
     }
 
-    @GetMapping("/users/names")
+    @GetMapping("/users/countries")
     @ResponseStatus(HttpStatus.OK)
-    @Operation(summary = "This is endpoint Find all the records in the table where the name column is not null, " +
-            "and return a list of all the names in the database.", description =
+    @Operation(summary = "This is endpoint Find all the countries in the database" +
+            "and return a list of all the countries in the database.", description =
             "Create request to read all employee", tags = {"Employee"})
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "OK. Information was get successfully"),
@@ -281,10 +279,10 @@ public class Controller {
             @ApiResponse(responseCode = "404", description = "NOT FOUND. Specified employee request not found."),
             @ApiResponse(responseCode = "409", description = "Employee already exists")})
     public List<String> getAllUsersNames() {
-        return service.findAllByName();
+        return service.findAllByCountry();
     }
 
-    @GetMapping("/users/allphones")
+    @GetMapping("/users/phones/all")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "This is endpoint Find all users phones numbers" +
             "and return a list of all the phone numbers in the database.", description =
@@ -296,6 +294,20 @@ public class Controller {
             @ApiResponse(responseCode = "409", description = "Employee already exists")})
     public List<String> getAllUsersPhones() {
         return service.findAllPhone();
-
     }
+
+    @GetMapping("/users/names/short")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "This is endpoint Find all the short names in the database" +
+            "and return a list of short names", description =
+            "Create request to read all employee", tags = {"Employee"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "OK. Information was get successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND. Specified employee request not found."),
+            @ApiResponse(responseCode = "409", description = "Employee already exists")})
+    public List<String> getAllShortNames() {
+        return service.findShortNames();
+    }
+
 }

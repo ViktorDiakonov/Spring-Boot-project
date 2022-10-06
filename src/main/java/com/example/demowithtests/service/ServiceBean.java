@@ -14,6 +14,7 @@ import org.springframework.data.domain.Sort;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -154,10 +155,10 @@ public class ServiceBean implements Service {
     }
 
     @Override
-    public List<String> findAllByName() {
+    public List<String> findAllByCountry() {
        List<Employee> allEmployee = repository.findAll();
         return allEmployee.stream()
-                .map(n -> n.getName())
+                .map(n -> n.getCountry())
                 .collect(Collectors.toList());
     }
 
@@ -166,7 +167,16 @@ public class ServiceBean implements Service {
         List<Employee> usersPhones = repository.findAll();
         return usersPhones.stream()
                 .map(p -> p.getPhone())
-                .sorted()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> findShortNames() {
+        List<Employee> shortNames = repository.findAll();
+        return shortNames.stream()
+                .map(n -> n.getName())
+                .filter(n -> n.length() == 3)
                 .collect(Collectors.toList());
     }
 

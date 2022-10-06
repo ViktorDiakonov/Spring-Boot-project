@@ -2,7 +2,6 @@ package com.example.demowithtests.service;
 
 import com.example.demowithtests.domain.Employee;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -73,12 +72,14 @@ public interface Service {
 
 //---------------------------------------------------Stream-----------------------------------------------------------
 
+
+
     /**
-     * Find all the records in the table where the name column is not null.
+     * Find all the countries in the database.
      *
-     * @return A list of all the names in the database.
+     * @return A list of all the countries in the database.
      */
-    List<String> findAllByName();
+    List<String> findAllByCountry();
 
 
     /**
@@ -87,5 +88,13 @@ public interface Service {
      * @return A list of all the phone numbers in the database.
      */
     List<String> findAllPhone();
+
+
+    /**
+     * Find all the short names in the database.
+     *
+     * @return A list of strings.
+     */
+    List<String> findShortNames();
 
 }
