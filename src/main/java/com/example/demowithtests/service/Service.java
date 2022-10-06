@@ -71,15 +71,12 @@ public interface Service {
 
 
 //---------------------------------------------------Stream-----------------------------------------------------------
-
-
-
     /**
-     * Find all the countries in the database.
+     * Search for different countries in the database.
      *
-     * @return A list of all the countries in the database.
+     * @return A list of all different countries in the database.
      */
-    List<String> findAllByCountry();
+    List<String> findDifferentCountries();
 
 
     /**
@@ -96,5 +93,13 @@ public interface Service {
      * @return A list of strings.
      */
     List<String> findShortNames();
+
+
+    /**
+     * Find all the phone numbers and names of people who have a phone number.
+     *
+     * @return A list of strings.
+     */
+    List<String> findPhoneAndName();
 
 }

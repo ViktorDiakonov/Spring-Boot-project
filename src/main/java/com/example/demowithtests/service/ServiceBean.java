@@ -154,11 +154,15 @@ public class ServiceBean implements Service {
         return sorts;
     }
 
+
+    //---------------------------------------------------Stream-----------------------------------------------------------
     @Override
-    public List<String> findAllByCountry() {
-       List<Employee> allEmployee = repository.findAll();
+    public List<String> findDifferentCountries() {
+        List<Employee> allEmployee = repository.findAll();
         return allEmployee.stream()
                 .map(n -> n.getCountry())
+                .distinct()
+                .sorted()
                 .collect(Collectors.toList());
     }
 
@@ -177,6 +181,15 @@ public class ServiceBean implements Service {
         return shortNames.stream()
                 .map(n -> n.getName())
                 .filter(n -> n.length() == 3)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> findPhoneAndName() {
+        List<Employee> nameAndPhone = repository.findAll();
+        return nameAndPhone.stream()
+                .map(n -> "name-" + n.getName() + " (phone: " + n.getPhone() + ")")
+                .sorted()
                 .collect(Collectors.toList());
     }
 
