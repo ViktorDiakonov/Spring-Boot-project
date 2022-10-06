@@ -30,17 +30,17 @@ public interface Service {
 
     Employee updateByPhone(String phone, Employee employee);
 
-    List<Employee>getEmployeeByPhoneU(String phone);
+    List<Employee> getEmployeeByPhoneU(String phone);
 
 
     /**
      * Find all employees with the given name, and return them in a page of size - size, sorted by the given sortList in the
      * given sortOrder.
      *
-     * @param name The name of the employee to search for.
-     * @param page The page number to retrieve.
-     * @param size The number of records per page.
-     * @param sortList A list of fields to sort by.
+     * @param name      The name of the employee to search for.
+     * @param page      The page number to retrieve.
+     * @param size      The number of records per page.
+     * @param sortList  A list of fields to sort by.
      * @param sortOrder "asc" or "desc"
      * @return Page<Employee>
      */
@@ -49,10 +49,10 @@ public interface Service {
     /**
      * Find all employees with the given address, and return them in a pageable format.
      *
-     * @param address The address to search for.
-     * @param page The page number to retrieve.
-     * @param size The number of records to return per page.
-     * @param sortList A list of fields to sort by.
+     * @param address   The address to search for.
+     * @param page      The page number to retrieve.
+     * @param size      The number of records to return per page.
+     * @param sortList  A list of fields to sort by.
      * @param sortOrder "asc" or "desc"
      * @return A Page<Employee> object.
      */
@@ -62,9 +62,9 @@ public interface Service {
     /**
      * Find all employees, sort them by the given list of fields, and return the page of results.
      *
-     * @param page The page number to be retrieved.
-     * @param size The number of records to return per page.
-     * @param sortList A list of fields to sort by.
+     * @param page      The page number to be retrieved.
+     * @param size      The number of records to return per page.
+     * @param sortList  A list of fields to sort by.
      * @param sortOrder The sort order, either "asc" or "desc".
      * @return A Page<Employee> object.
      */
@@ -72,11 +72,20 @@ public interface Service {
 
 
 //---------------------------------------------------Stream-----------------------------------------------------------
+
     /**
      * Find all the records in the table where the name column is not null.
      *
      * @return A list of all the names in the database.
      */
-    List<String>findAllByName();
+    List<String> findAllByName();
+
+
+    /**
+     * Find all phone numbers.
+     *
+     * @return A list of all the phone numbers in the database.
+     */
+    List<String> findAllPhone();
 
 }

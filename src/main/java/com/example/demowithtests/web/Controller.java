@@ -120,7 +120,7 @@ public class Controller {
     }
 
     //Обновление юзера
-    @PatchMapping ("/users/update/{id}")
+    @PatchMapping("/users/update/{id}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "This is endpoint returned a employee by his id.", description =
             "Create request to read a employee by id", tags = {"Employee"})
@@ -135,7 +135,7 @@ public class Controller {
 
 
     //Обновление юзера2
-    @PatchMapping ("/users/update2/{id}")
+    @PatchMapping("/users/update2/{id}")
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "This is endpoint returned a employee by his id.", description =
             "Create request to read a employee by id", tags = {"Employee"})
@@ -189,7 +189,7 @@ public class Controller {
             @ApiResponse(responseCode = "400", description = "Invalid input"),
             @ApiResponse(responseCode = "404", description = "NOT FOUND. Specified employee request not found."),
             @ApiResponse(responseCode = "409", description = "Employee already exists")})
-    public List<Employee> getName(@RequestParam (value = "name") String name){
+    public List<Employee> getName(@RequestParam(value = "name") String name) {
         return service.getName(name);
     }
 
@@ -197,7 +197,7 @@ public class Controller {
     // выводит всех пользователей по указанной стране
     @GetMapping(value = "/users", params = {"country"})
     @ResponseStatus(HttpStatus.OK)
-    public List<Employee> getCountry(@RequestParam (value = "country") String country){
+    public List<Employee> getCountry(@RequestParam(value = "country") String country) {
         return service.getCountry(country);
     }
 
@@ -205,7 +205,7 @@ public class Controller {
     // выводит всех пользователей из колонки "name"
     @GetMapping(value = "/users", params = {"allname"})
     @ResponseStatus(HttpStatus.OK)
-    public List<Employee> getAllName(@RequestParam (value = "name") String name){
+    public List<Employee> getAllName(@RequestParam(value = "name") String name) {
         return service.getAllName(name);
     }
 
@@ -213,7 +213,7 @@ public class Controller {
     //получение пользователя по его номеру телефона
     @GetMapping(value = "/users", params = {"phone"})
     @ResponseStatus(HttpStatus.OK)
-    public List<Employee> getNameByPhone(@RequestParam (value = "phone") String phone) {
+    public List<Employee> getNameByPhone(@RequestParam(value = "phone") String phone) {
         return service.getNameByPhone(phone);
     }
 
@@ -264,9 +264,9 @@ public class Controller {
             @ApiResponse(responseCode = "404", description = "NOT FOUND. Specified employee request not found."),
             @ApiResponse(responseCode = "409", description = "Employee already exists")})
     public Page<Employee> findAll(@RequestParam(defaultValue = "0") int page,
-                                        @RequestParam(defaultValue = "10") int size,
-                                        @RequestParam(defaultValue = "") List<String> sortList,
-                                        @RequestParam(defaultValue = "ASC") Sort.Direction sortOrder) {
+                                  @RequestParam(defaultValue = "10") int size,
+                                  @RequestParam(defaultValue = "") List<String> sortList,
+                                  @RequestParam(defaultValue = "ASC") Sort.Direction sortOrder) {
         return service.findAll(page, size, sortList, sortOrder.toString());
     }
 
@@ -284,4 +284,18 @@ public class Controller {
         return service.findAllByName();
     }
 
+    @GetMapping("/users/allphones")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "This is endpoint Find all users phones numbers" +
+            "and return a list of all the phone numbers in the database.", description =
+            "Create request to read all employee", tags = {"Employee"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "OK. Information was get successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND. Specified employee request not found."),
+            @ApiResponse(responseCode = "409", description = "Employee already exists")})
+    public List<String> getAllUsersPhones() {
+        return service.findAllPhone();
+
+    }
 }

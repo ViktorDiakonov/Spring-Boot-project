@@ -161,4 +161,14 @@ public class ServiceBean implements Service {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<String> findAllPhone() {
+        List<Employee> usersPhones = repository.findAll();
+        return usersPhones.stream()
+                .map(p -> p.getPhone())
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+
 }
