@@ -70,4 +70,13 @@ public interface Service {
      */
     Page<Employee> findAll(int page, int size, List<String> sortList, String sortOrder);
 
+
+//---------------------------------------------------Stream-----------------------------------------------------------
+    /**
+     * Find all the records in the table where the name column is not null.
+     *
+     * @return A list of all the names in the database.
+     */
+    List<String>findAllByName();
+
 }

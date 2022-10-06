@@ -270,4 +270,18 @@ public class Controller {
         return service.findAll(page, size, sortList, sortOrder.toString());
     }
 
+    @GetMapping("/users/names")
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "This is endpoint Find all the records in the table where the name column is not null, " +
+            "and return a list of all the names in the database.", description =
+            "Create request to read all employee", tags = {"Employee"})
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "OK. Information was get successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid input"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND. Specified employee request not found."),
+            @ApiResponse(responseCode = "409", description = "Employee already exists")})
+    public List<String> getAllUsersNames() {
+        return service.findAllByName();
+    }
+
 }

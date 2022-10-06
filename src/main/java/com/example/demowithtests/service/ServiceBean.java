@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Slf4j
@@ -151,4 +152,13 @@ public class ServiceBean implements Service {
         }
         return sorts;
     }
+
+    @Override
+    public List<String> findAllByName() {
+       List<Employee> allEmployee = repository.findAll();
+        return allEmployee.stream()
+                .map(n -> n.getName())
+                .collect(Collectors.toList());
+    }
+
 }
