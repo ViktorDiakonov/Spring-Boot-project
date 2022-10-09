@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 public class EmployeeSaveDto {
 
@@ -29,4 +31,5 @@ public class EmployeeSaveDto {
 
     @NotNull(message = "Phone may not be null")
     public String phone;
+    public Set<CarDto> car = new HashSet<>();
 }
