@@ -32,5 +32,5 @@ public class EmployeeReadDto {
 
     //todo: dfhgjkdfhg Jira - 5544
     public Date date = Date.from(Instant.now());
-    public Set<CarDto> car = new HashSet<>();
+    public Set<CarDto> cars = new HashSet<>();
 }
