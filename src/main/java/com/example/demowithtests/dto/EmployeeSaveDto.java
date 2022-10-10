@@ -31,5 +31,8 @@ public class EmployeeSaveDto {
 
     @NotNull(message = "Phone may not be null")
     public String phone;
+
     public Set<CarDto> car = new HashSet<>();
+
+    public CardDto card;
 }

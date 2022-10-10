@@ -26,4 +26,6 @@ public class EmployeeSave2Dto {
     public String email;
 
     //public Set<CarDto> car = new HashSet<>();
+
+    public CardDto card;
 }

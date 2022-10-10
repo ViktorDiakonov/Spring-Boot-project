@@ -28,6 +28,11 @@ public class Employee {
     @JoinColumn(name = "employee_id")
     private Set<Car> car = new HashSet<>();
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
+    private Card card;
+
+
 //    public String getAddress() {
 //        return address;
 //    }
