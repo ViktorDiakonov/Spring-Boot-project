@@ -25,7 +25,7 @@ public class EmployeeSave2Dto {
     @Schema(description = "Email address of an employee.", example = "billys@mail.com", required = true)
     public String email;
 
-    //public Set<CarDto> car = new HashSet<>();
+    public Set<CarDto> car = new HashSet<>();
 
     public CardDto card;
 }
