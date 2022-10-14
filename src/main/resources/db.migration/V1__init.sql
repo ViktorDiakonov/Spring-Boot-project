@@ -6,6 +6,8 @@ create table public.users (
                               address character varying,
                               phone character varying,
                               employee_id integer,
+                              id_deleted boolean,
+                              gender character varying,
                               foreign key (employee_id) references public.cards (id)
                                   match simple on update no action on delete no action
 );
