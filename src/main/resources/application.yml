@@ -26,6 +26,7 @@ spring:
 server:
   port: 8087 #set your port
 
+
   # Swagger configuration
 springdoc:
     swagger-ui:
