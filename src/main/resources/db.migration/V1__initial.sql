@@ -11,4 +11,3 @@ create table public.users (
                               foreign key (employee_id) references public.cards (id)
                                   match simple on update no action on delete no action
 );
-
