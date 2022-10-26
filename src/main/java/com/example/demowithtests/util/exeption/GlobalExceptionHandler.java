@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.Date;
@@ -23,6 +24,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceWasDeletedException.class)
     protected ResponseEntity<MyGlobalExceptionHandler> handleDeleteException() {
         return new ResponseEntity<>(new MyGlobalExceptionHandler("This user was deleted"), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(Unauthorized.class)
+    protected ResponseEntity<MyGlobalExceptionHandler> unauthorized() {
+        return new ResponseEntity<>(new MyGlobalExceptionHandler("user Unauthorized"), HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(Exception.class)

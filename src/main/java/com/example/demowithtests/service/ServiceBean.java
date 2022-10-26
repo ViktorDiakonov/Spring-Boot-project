@@ -4,6 +4,7 @@ import com.example.demowithtests.domain.Employee;
 import com.example.demowithtests.repository.Repository;
 import com.example.demowithtests.util.exeption.ResourceNotFoundException;
 import com.example.demowithtests.util.exeption.ResourceWasDeletedException;
+import com.example.demowithtests.util.exeption.Unauthorized;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -39,7 +40,8 @@ public class ServiceBean implements Service {
     public Employee getById(Integer id) {
         Employee employee = repository.findById(id)
                 // .orElseThrow(() -> new EntityNotFoundException("Employee not found with id = " + id));
-                .orElseThrow(ResourceNotFoundException::new);
+                .orElseThrow(Unauthorized::new);
+                //.orElseThrow(ResourceNotFoundException::new);
          /*if (employee.getIsDeleted()) {
             throw new EntityNotFoundException("Employee was deleted with id = " + id);
         }*/

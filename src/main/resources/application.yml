@@ -16,6 +16,11 @@ spring:
 #    open-in-view: false
 #    generate-ddl: true
 
+  security:
+      user:
+        name: user
+        password: password
+
   flyway:
 #   locations: filesystem:.\src\main\resources\db\migration
     enabled: true
