@@ -27,7 +27,6 @@ public class EmployeeDetailsService implements UserDetailsService {
 
         if (employee.isEmpty())
             throw new UsernameNotFoundException("Employee not found");
-
         return new EmployeeDetails(employee.get());
     }
 }
