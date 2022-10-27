@@ -23,6 +23,8 @@ public class Employee {
     private String email;
     private String address;
     private String phone;
+    private String username;
+    private String password;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")
