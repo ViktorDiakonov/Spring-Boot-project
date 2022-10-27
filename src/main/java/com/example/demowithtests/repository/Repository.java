@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Optional;
 
 @org.springframework.stereotype.Repository
 //@Component
@@ -43,4 +44,7 @@ public interface Repository extends JpaRepository<Employee, Integer> {
 
     // поиск всех пользователей с использованием пагинации, фильтрации сортировки
     Page<Employee> findAll(Pageable pageable);
+
+    // поиск пользователей по логину
+    Optional<Employee> findByUsername(String username);
 }
