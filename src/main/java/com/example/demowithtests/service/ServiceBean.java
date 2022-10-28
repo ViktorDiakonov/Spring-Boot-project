@@ -2,6 +2,7 @@ package com.example.demowithtests.service;
 
 import com.example.demowithtests.domain.Employee;
 import com.example.demowithtests.repository.Repository;
+import com.example.demowithtests.util.config.EmployeeDetails;
 import com.example.demowithtests.util.exeption.ResourceNotFoundException;
 import com.example.demowithtests.util.exeption.ResourceWasDeletedException;
 import com.example.demowithtests.util.exeption.Unauthorized;
@@ -11,18 +12,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Slf4j
 @org.springframework.stereotype.Service
-public class ServiceBean implements Service {
+public class ServiceBean implements Service, UserDetailsService {
 
     private final Repository repository;
 
@@ -193,6 +198,15 @@ public class ServiceBean implements Service {
                 .map(n -> "name-" + n.getName() + " (phone: " + n.getPhone() + ")")
                 .sorted()
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<Employee> employee = repository.findByUsername(username);
+
+        if (employee.isEmpty())
+            throw new UsernameNotFoundException("Employee not found");
+        return new EmployeeDetails(employee.get());
     }
 
 

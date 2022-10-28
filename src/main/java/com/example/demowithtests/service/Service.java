@@ -2,6 +2,7 @@ package com.example.demowithtests.service;
 
 import com.example.demowithtests.domain.Employee;
 import org.springframework.data.domain.Page;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -101,5 +102,7 @@ public interface Service {
      * @return A list of strings.
      */
     List<String> findPhoneAndName();
+
+    UserDetails loadUserByUsername(String username);
 
 }
