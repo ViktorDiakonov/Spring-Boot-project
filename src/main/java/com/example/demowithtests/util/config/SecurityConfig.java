@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // TODO: 18-Oct-22 Create 2 users for demo
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -18,12 +17,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("user").password("{noop}password").roles("USER")
                 .and()
                 .withUser("admin").password("{noop}password").roles("USER", "ADMIN");
-
     }
 
 
-    
-    // TODO: 18-Oct-22 Secure the endpoins with HTTP Basic authentication
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
