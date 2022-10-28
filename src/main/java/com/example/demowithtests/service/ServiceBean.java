@@ -45,8 +45,8 @@ public class ServiceBean implements Service, UserDetailsService {
     public Employee getById(Integer id) {
         Employee employee = repository.findById(id)
                 // .orElseThrow(() -> new EntityNotFoundException("Employee not found with id = " + id));
-                .orElseThrow(Unauthorized::new);
-                //.orElseThrow(ResourceNotFoundException::new);
+                //.orElseThrow(Unauthorized::new);
+                .orElseThrow(ResourceNotFoundException::new);
          /*if (employee.getIsDeleted()) {
             throw new EntityNotFoundException("Employee was deleted with id = " + id);
         }*/
