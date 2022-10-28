@@ -103,6 +103,16 @@ public interface Service {
      */
     List<String> findPhoneAndName();
 
+
+    /**
+     * "Given a username, return a UserDetails object that represents the user."
+     *
+     * The UserDetails object is a Spring Security interface that represents a user. It has a number of methods that return
+     * information about the user, such as their username, password, and authorities
+     *
+     * @param username The username of the user you want to load.
+     * @return A UserDetails object.
+     */
     UserDetails loadUserByUsername(String username);
 
 }
